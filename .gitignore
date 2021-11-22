@@ -127,3 +127,7 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+selfblog/thoughts/migrations
+
+/migrations
