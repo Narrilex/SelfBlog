@@ -1,12 +1,22 @@
 from django.http import HttpResponse, HttpResponseNotFound, Http404
 from django.shortcuts import render, redirect
 
+from .models import *
+
 # Create your views here.
 
+menu = ["Глагна", "О сайте", "Добавить статью", "Обратная связь", "Войти"]
+
 def index(request):
-    return HttpResponse("Страница приложения thoughts")
+    posts = Thought.objects.all()
+    return render(request, 'thoughts/index.html', {'posts': posts, 'menu': menu, 'title': 'Glagna'})
+
+def about(request):
+    return render(request, 'thoughts/about.html', {'menu': menu, 'title': 'О сайте'})
 
 def categories(request, catid):
+    if request.POST:
+        print(request.POST)
     return HttpResponse(f"<h1>Статьи по категориям </h1><p>{catid}</p>")
 
 def archive(request, year):
